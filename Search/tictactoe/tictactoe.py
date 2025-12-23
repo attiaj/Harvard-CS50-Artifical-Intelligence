@@ -53,8 +53,17 @@ def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
+    # Validate action coordinates
+    i, j = action
+    if i < 0 or i >= 3 or j < 0 or j >= 3:
+        raise Exception("Invalid action: coordinates out of bounds")
+    
+    # Validate that the cell is empty
+    if board[i][j] != EMPTY:
+        raise Exception("Invalid action: cell already taken")
+    
     new_board = copy.deepcopy(board)
-    new_board[action[0]][action[1]] = player(board)
+    new_board[i][j] = player(board)
     return new_board
 
 
